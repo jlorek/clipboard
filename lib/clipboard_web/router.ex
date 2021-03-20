@@ -19,6 +19,8 @@ defmodule ClipboardWeb.Router do
 
     live "/", PageLive, :index
     live "/counter", CounterLive, :index
+    live "/parent", ParentLive, :index
+
   end
 
   # Other scopes may use custom stacks.

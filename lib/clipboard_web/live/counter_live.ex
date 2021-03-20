@@ -17,9 +17,8 @@ defmodule ClipboardWeb.CounterLive do
     ~L"""
     <div id="counter"
          phx-hook="Counter"
-         count=<%= @count %>
-          x-data="{count: 0}"
-          x-on:count-updated="count = $event.detail.count">
+         x-data="{count: <%= @count %>}"
+         x-init="$watch('count', value => { console.log('watcher', value) })"">
       <h1>The assigns counter is: <span><%= @count %></span></h1>
       <h1>The alpine count is: <span x-text="count"></span></h1>
       <button phx-click="decrement">Decrement</button>
