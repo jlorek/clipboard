@@ -8,9 +8,9 @@ defmodule ClipboardWeb.ChildLive do
   def render(assigns) do
     ~L"""
     <div id="child-<%= @id %>"
-         x-data="{count: 0}"
-         @count-changed.window="count = $event.detail.count">
-    child <%= @id %>, count <span x-text="count"></span>
+         x-data="{}"
+         x-subscribe>
+    child <%= @id %>, count <span x-text="$store.clipboard.count"></span>
     </div>
     """
   end

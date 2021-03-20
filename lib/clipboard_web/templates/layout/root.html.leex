@@ -7,6 +7,7 @@
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "Clipboard", suffix: " · Phoenix Framework" %>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/spruce@2.x.x/dist/spruce.umd.js"></script>
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
@@ -28,5 +29,9 @@
       </section>
     </header>
     <%= @inner_content %>
+    <script>
+      Spruce.store('clipboard', { count: 0 })
+      console.log("Spruce initialized", Spruce)
+    </script>
   </body>
 </html>

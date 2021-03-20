@@ -8,15 +8,14 @@ defmodule ClipboardWeb.ParentLive do
   def render(assigns) do
     ~L"""
     <div id="parent"
-        x-data="{count: 0}">
-      parent, count <span x-text="count"></span>
+        x-data="{}"
+        x-subscribe>
+      parent, count <span x-text="$store.clipboard.count"></span>
       <br />
-      <button @click="$dispatch('count-changed', {count: ++count})">Increment</button>
+      <button @click="$store.clipboard.count++">Increment</button>
       <%= live_render(@socket, ClipboardWeb.ChildLive, id: "two") %>
       <%= live_render(@socket, ClipboardWeb.ChildLive, id: "two") %>
     </div>
     """
   end
-  # <%= live_render(@socket, ClipboardWeb.SubLive, id: "2") %>
-
 end
