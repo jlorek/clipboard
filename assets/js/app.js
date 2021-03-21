@@ -21,7 +21,11 @@ import '@ryangjchandler/spruce'
 import 'alpinejs'
 
 // store
-Spruce.store('clipboard', { count: 0 })
+Spruce.store('clipboard', {
+    count: 0,
+    base64: "no base64",
+    mimetype: "no mimetype",
+    filename: "no filename"});
 console.log("Spruce initialized", Spruce)
 
 import Hooks from  "./hooks.js"

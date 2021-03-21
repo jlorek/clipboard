@@ -4,9 +4,10 @@ defmodule ClipboardWeb.TopicLive do
   def mount(params = %{"topic_id" => topic_id}, _session, socket) do
     topic = Clipboard.Board.get_topic!(topic_id)
 
-    socket = socket
-    |> assign(:topic_id, topic.id)
-    |> assign(:topic_title, topic.title)
+    socket =
+      socket
+      |> assign(:topic_id, topic.id)
+      |> assign(:topic_title, topic.title)
 
     {:ok, socket}
   end
@@ -27,6 +28,7 @@ defmodule ClipboardWeb.TopicLive do
     <h1><%= @topic_title %> 🐣</h1>
     <div>
     <%= live_component(@socket, ClipboardWeb.ClipboardLive, id: "clipboard") %>
+    <%= live_component(@socket, ClipboardWeb.ClipboardViewLive, id: "clipboard_view") %>
     </div>
     <h4>Debug Data</h4>
     <pre>
@@ -34,4 +36,18 @@ defmodule ClipboardWeb.TopicLive do
     </pre>
     """
   end
+
+  # def handle_event(
+  #       "paste",
+  #       %{"data" => data, "mimetype" => mimetype, "filename" => filename},
+  #       socket
+  #     ) do
+  #   socket =
+  #     socket
+  #     |> assign(:data, data)
+  #     |> assign(:mimetype, mimetype)
+  #     |> assign(:filename, filename)
+
+  #   {:noreply, socket}
+  # end
 end
