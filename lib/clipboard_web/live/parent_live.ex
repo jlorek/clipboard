@@ -23,6 +23,6 @@ defmodule ClipboardWeb.ParentLive do
       <%= live_render(@socket, ClipboardWeb.ChildLive, id: "two") %>
       <%= live_render(@socket, ClipboardWeb.ChildLive, id: "two") %>
       </div>
-      """
+    """
   end
 end

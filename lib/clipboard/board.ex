@@ -49,9 +49,16 @@ defmodule Clipboard.Board do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_topic(attrs \\ %{}) do
+
+  # def create_topic(attrs \\ %{}) do
+  #   %Topic{}
+  #   |> Topic.changeset(attrs)
+  #   |> Repo.insert()
+  # end
+
+  def create_topic do
     %Topic{}
-    |> Topic.changeset(attrs)
+    |> Topic.changeset(%{title: Clipboard.TopicTitleGenerator.generate()})
     |> Repo.insert()
   end
 

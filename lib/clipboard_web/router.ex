@@ -18,6 +18,8 @@ defmodule ClipboardWeb.Router do
     pipe_through :browser
 
     live "/", WelcomeLive, :index
+    #live "/topic/new", TopicLive, :new
+    live "/topic/:topic_id", TopicLive, :existing
 
     live "/counter", CounterLive, :index
     live "/parent", ParentLive, :index
