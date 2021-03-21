@@ -7,6 +7,8 @@ defmodule Clipboard.Board.Topic do
   schema "topics" do
     field :title, :string
 
+    has_one :post, Clipboard.Board.Post
+
     timestamps()
   end
 

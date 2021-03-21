@@ -9,6 +9,8 @@ defmodule Clipboard.Board.Post do
     field :filename, :string
     field :mimetype, :string
 
+    belongs_to :topic, Clipboard.Board.Topic
+
     timestamps()
   end
 
