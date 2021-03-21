@@ -13,9 +13,16 @@ defmodule ClipboardWeb.ParentLive do
       parent, count <span x-text="$store.clipboard.count"></span>
       <br />
       <button @click="$store.clipboard.count++">Increment</button>
+      <br />
+      live components
+      <br />
+      <%= live_component(@socket, ClipboardWeb.ChildComponentLive) %>
+      <br />
+      live views
+      <br />
       <%= live_render(@socket, ClipboardWeb.ChildLive, id: "two") %>
       <%= live_render(@socket, ClipboardWeb.ChildLive, id: "two") %>
-    </div>
-    """
+      </div>
+      """
   end
 end
