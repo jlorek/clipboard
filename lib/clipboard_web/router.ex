@@ -17,7 +17,8 @@ defmodule ClipboardWeb.Router do
   scope "/", ClipboardWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", WelcomeLive, :index
+
     live "/counter", CounterLive, :index
     live "/parent", ParentLive, :index
 
