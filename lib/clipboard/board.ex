@@ -140,6 +140,10 @@ defmodule Clipboard.Board do
   """
   def get_post!(id), do: Repo.get!(Post, id)
 
+  def get_post_for_topic(topic_id) do
+    Repo.get_by(Post, topic_id: topic_id)
+  end
+
   @doc """
   Creates a post.
 
@@ -156,6 +160,15 @@ defmodule Clipboard.Board do
     %Post{}
     |> Post.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def upsert_post(attrs \\ %{}) do
+    case Repo.get_by(Post, topic_id: attrs.topic_id) do
+      nil -> %Post{topic_id: attrs.topic_id}
+      existing -> existing
+    end
+    |> Post.changeset(attrs)
+    |> Repo.insert_or_update()
   end
 
   @doc """

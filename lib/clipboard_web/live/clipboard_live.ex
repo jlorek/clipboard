@@ -1,27 +1,51 @@
 defmodule ClipboardWeb.ClipboardLive do
   use ClipboardWeb, :live_component
+  alias Clipboard.Board.Post
 
   def mount(socket) do
+    {:ok, socket}
+  end
+
+  def update(assigns, socket) do
+    maybe_existing =
+      case Clipboard.Board.get_post_for_topic(assigns.topic_id) do
+        nil -> %Post{}
+        existing -> existing
+      end
+
+    IO.inspect(maybe_existing, label: "maybe existing post")
+
     socket =
       socket
-      |> assign(:base64, "no base64")
-      |> assign(:mimetype, "no mimetype")
-      |> assign(:filename, "no filename")
+      # when defining update/2 id (and other parameters) must be
+      # passed manually from assigns to socket
+      |> assign(:id, assigns.id)
+      |> assign(:topic_id, assigns.topic_id)
+      |> assign(:base64, maybe_existing.data)
+      |> assign(:mimetype, maybe_existing.mimetype)
+      |> assign(:filename, maybe_existing.filename)
 
     {:ok, socket}
   end
 
   def render(assigns) do
+    # assigns.id gets assigned from live_component call (in TopicLive)
     ~L"""
     <div
       id="<%= @id %>"
       phx-hook="clipboard"
       x-data="{
+        // shadow properties
         base64: '<%= @base64 %>',
         mimetype: '<%= @mimetype %>',
         filename: '<%= @filename %>'}"
       x-subscribe
       x-init="
+        // set initial values from live view
+        $store.clipboard.base64 = base64;
+        $store.clipboard.mimetype = mimetype;
+        $store.clipboard.filename = filename;
+        // setup watcher for future values
         $watch('base64', value => { $store.clipboard.base64 = value });
         $watch('mimetype', value => { $store.clipboard.mimetype = value });
         $watch('filename', value => { $store.clipboard.filename = value });">
@@ -41,6 +65,13 @@ defmodule ClipboardWeb.ClipboardLive do
         %{"base64" => base64, "mimetype" => mimetype, "filename" => filename},
         socket
       ) do
+
+    Clipboard.Board.upsert_post(%{
+      topic_id: socket.assigns.topic_id,
+      data: base64,
+      mimetype: mimetype,
+      filename: filename
+    })
 
     socket =
       socket

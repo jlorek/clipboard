@@ -17,7 +17,7 @@ defmodule Clipboard.Board.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:data, :mimetype, :filename])
-    |> validate_required([:data, :mimetype, :filename])
+    |> cast(attrs, [:data, :mimetype, :filename, :topic_id])
+    |> validate_required([:data, :mimetype, :filename, :topic_id])
   end
 end

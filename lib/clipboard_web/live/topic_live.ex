@@ -27,7 +27,7 @@ defmodule ClipboardWeb.TopicLive do
     ~L"""
     <h1><%= @topic_title %> 🐣</h1>
     <div>
-    <%= live_component(@socket, ClipboardWeb.ClipboardLive, id: "clipboard") %>
+    <%= live_component(@socket, ClipboardWeb.ClipboardLive, id: "clipboard", topic_id: assigns.topic_id) %>
     <%= live_component(@socket, ClipboardWeb.ClipboardViewLive, id: "clipboard_view") %>
     </div>
     <h4>Debug Data</h4>
