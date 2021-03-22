@@ -27,8 +27,9 @@ defmodule ClipboardWeb.TopicLive do
     ~L"""
     <h1><%= @topic_title %> 🐣</h1>
     <div>
-    <%= live_component(@socket, ClipboardWeb.ClipboardLive, id: "clipboard", topic_id: assigns.topic_id) %>
-    <%= live_component(@socket, ClipboardWeb.ClipboardViewLive, id: "clipboard_view") %>
+      <%= live_render(@socket, ClipboardWeb.UserListLive, id: "user_list", session: %{"topic_id" => assigns.topic_id}) %>
+      <%= live_component(@socket, ClipboardWeb.ClipboardLive, id: "clipboard", topic_id: assigns.topic_id) %>
+      <%= live_component(@socket, ClipboardWeb.ClipboardViewLive, id: "clipboard_view") %>
     </div>
     <h4>Debug Data</h4>
     <pre>
@@ -36,18 +37,4 @@ defmodule ClipboardWeb.TopicLive do
     </pre>
     """
   end
-
-  # def handle_event(
-  #       "paste",
-  #       %{"data" => data, "mimetype" => mimetype, "filename" => filename},
-  #       socket
-  #     ) do
-  #   socket =
-  #     socket
-  #     |> assign(:data, data)
-  #     |> assign(:mimetype, mimetype)
-  #     |> assign(:filename, filename)
-
-  #   {:noreply, socket}
-  # end
 end

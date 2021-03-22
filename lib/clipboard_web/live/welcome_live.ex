@@ -11,7 +11,7 @@ defmodule ClipboardWeb.WelcomeLive do
     #   |> redirect(to: Routes.topic_path(socket, :new))
 
     socket = case Clipboard.Board.create_topic() do
-      {:ok, topic} -> redirect(socket, to: Routes.topic_path(socket, :existing, topic.id))
+      {:ok, topic} -> push_redirect(socket, to: Routes.topic_path(socket, :existing, topic.id))
       {:error, _} -> raise "Could not created new topic"
     end
 
