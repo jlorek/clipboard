@@ -13,25 +13,21 @@ import "../css/app.scss"
 //     import socket from "./socket"
 //
 import "phoenix_html"
-import {Socket} from "phoenix"
+import { Socket } from "phoenix"
 import NProgress from "nprogress"
-import {LiveSocket} from "phoenix_live_view"
+import { LiveSocket } from "phoenix_live_view"
 
 import '@ryangjchandler/spruce'
 import 'alpinejs'
 
-// store
-Spruce.store('clipboard', {
-    count: 0,
-    base64: "no base64",
-    mimetype: "no mimetype",
-    filename: "no filename"});
-console.log("Spruce initialized", Spruce)
+import { initStore } from "./store.js"
+initStore();
 
-import Hooks from  "./hooks.js"
+import Hooks from "./hooks.js"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
+    // alpinejs + liveview secret sauce
     dom: {
         onBeforeElUpdated(from, to) {
             if (from.__x) {

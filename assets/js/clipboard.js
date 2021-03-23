@@ -42,8 +42,9 @@ async function onPaste(event) {
                 pasteCallback({
                     mimetype: "text/plain",
                     filename: "clipboard.txt",
-                    base64: Base64.encode(text),
-                    data: text });
+                    base64: "data:text/plain;base64," + Base64.encode(text),
+                    data: text
+                });
                 //window.socketMessenger.sendText(mimeType, text);
                 return;
             }
@@ -57,7 +58,8 @@ async function onPaste(event) {
                     mimetype: mimetype,
                     filename: file.name,
                     base64: file.base64,
-                    data: file.base64 });
+                    data: file.base64
+                });
                 //window.socketMessenger.sendFile(mimeType, file.name, file.base64)
                 return;
             }
@@ -152,14 +154,25 @@ async function onPasteBasic(pasteEvent) {
     console.log("Got paste data, but could not extract text.", items)
 }
 
-function toClipboardLocal() {
+// Thanks!
+// https://stackoverflow.com/a/33928558/1010496
+// Copies a string to the clipboard. Must be called from within an
+// event handler such as click. May return false if it failed, but
+// this is not always possible. Browser support for Chrome 43+,
+// Firefox 42+, Safari 10+, Edge and Internet Explorer 10+.
+// Internet Explorer: The clipboard feature may be disabled by
+// an administrator. By default a prompt is shown the first
+// time the clipboard is used (per session).
+function copyToClipboard(text) {
     if (window.clipboardData && window.clipboardData.setData) {
         // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
         return window.clipboardData.setData("Text", text);
     }
     else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-        var textarea = document.getElementById("clipboardSource")
-        //textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in Microsoft Edge.
+        var textarea = document.createElement("textarea");
+        textarea.textContent = text;
+        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in Microsoft Edge.
+        document.body.appendChild(textarea);
         textarea.select();
         try {
             return document.execCommand("copy");  // Security exception may be thrown by some browsers.
@@ -168,9 +181,15 @@ function toClipboardLocal() {
             console.warn("Copy to clipboard failed.", ex);
             return false;
         }
+        finally {
+            document.body.removeChild(textarea);
+        }
     }
 }
 
 export {
-    setupPasteListener
+    setupPasteListener,
+    // maybe also have a look here
+    // https://github.com/ryangjchandler/alpine-clipboard
+    copyToClipboard
 }

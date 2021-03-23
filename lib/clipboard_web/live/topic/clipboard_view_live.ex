@@ -14,7 +14,6 @@ defmodule ClipboardWeb.Topic.ClipboardViewLive do
       <div>Spruce mimetype: <span x-text="$store.clipboard.mimetype"></span></div>
       <div>Spruce filename: <span x-text="$store.clipboard.filename"></span></div>
       <button @click="">Copy to clipboard</button>
-      <button @click="document.execCommand('paste');">Copy from clipboard</button>
     </div>
     """
   end

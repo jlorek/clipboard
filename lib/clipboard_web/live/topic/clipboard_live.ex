@@ -48,15 +48,16 @@ defmodule ClipboardWeb.Topic.ClipboardLive do
         $store.clipboard.mimetype = mimetype;
         $store.clipboard.filename = filename;
         // setup watcher for future values
-        $watch('base64', value => { $store.clipboard.base64 = value });
-        $watch('mimetype', value => { $store.clipboard.mimetype = value });
-        $watch('filename', value => { $store.clipboard.filename = value });">
+        $watch('base64', value => { $store.clipboard.base64 = value; $store.clipboard.newdata = true; });
+        $watch('mimetype', value => { $store.clipboard.mimetype = value; $store.clipboard.newdata = true; });
+        $watch('filename', value => { $store.clipboard.filename = value; $store.clipboard.newdata = true; });">
     </template>
     """
   end
 
   @doc """
   New paste data arrives from a client.
+  Data is first saved and then broadcasted.
   """
   @impl true
   def handle_event(
@@ -81,6 +82,9 @@ defmodule ClipboardWeb.Topic.ClipboardLive do
     {:noreply, socket}
   end
 
+  @doc """
+  New paste data arrives via broadcast.
+  """
   @impl true
   def handle_info(%Broadcast{event: "post_changed", payload: post}, socket) do
     socket =

@@ -18,6 +18,9 @@ defmodule Clipboard.Board.Post do
   def changeset(post, attrs) do
     post
     |> cast(attrs, [:data, :mimetype, :filename, :topic_id])
-    |> validate_required([:data, :mimetype, :filename, :topic_id])
+    # when pasting files, some browsers may ommit the mimetype for certain content
+    # https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
+    # The mediatype is a MIME type string, such as 'image/jpeg' for a JPEG image file. If omitted, defaults to text/plain;charset=US-ASCII
+    |> validate_required([:data, :filename, :topic_id])
   end
 end
