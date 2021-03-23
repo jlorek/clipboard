@@ -8,19 +8,18 @@ defmodule ClipboardWeb.Topic.UserListLive do
   alias Phoenix.Socket.Broadcast
 
   def mount(params, session = %{"topic_id" => topic_id}, socket) do
-
-    IO.inspect(params, label: "user_list_live/params")
-    IO.inspect(session, label: "user_list_live/session")
-    IO.inspect(socket, label: "user_list_live/socket")
+    # IO.inspect(params, label: "user_list_live/params")
+    # IO.inspect(session, label: "user_list_live/session")
+    # IO.inspect(socket, label: "user_list_live/socket")
 
     # Clipboard.PubSub is defined in application.ex children
-    Phoenix.PubSub.subscribe(Clipboard.PubSub, "topic:#{topic_id}")
+    Phoenix.PubSub.subscribe(Clipboard.PubSub, "topic_users:#{topic_id}")
 
-    new_user = create_connected_user()
+    user = create_connected_user()
 
     {:ok, _} =
-      Presence.track(self(), "topic:#{topic_id}", new_user.uuid, %{
-        name: new_user.name,
+      Presence.track(self(), "topic_users:#{topic_id}", user.uuid, %{
+        name: user.name,
         online_at: inspect(System.system_time(:second))
       })
 
@@ -28,6 +27,7 @@ defmodule ClipboardWeb.Topic.UserListLive do
       socket
       |> assign(:id, socket.id)
       |> assign(:topic_id, topic_id)
+      |> assign(:user, user)
       |> assign(:connected_users, [])
 
     {:ok, socket}
@@ -38,9 +38,9 @@ defmodule ClipboardWeb.Topic.UserListLive do
     <div id="<%= @id %>">
       <h3>Connected users</h3>
       <ul>
-        <%= for other <- @connected_users do %>
-        <li><%= other.name %></li>
-        <% end %>
+      <%= for other <- @connected_users do %>
+        <li><%= other.name %><%= if other.uuid == @user.uuid do %> (it's you)<% end %></li>
+      <% end %>
       </ul>
     </div>
     """
@@ -51,7 +51,7 @@ defmodule ClipboardWeb.Topic.UserListLive do
   defp create_connected_user do
     %{
       uuid: UUID.uuid4(),
-      name: "some_random_name"
+      name: Clipboard.TextGenerator.generate_name()
     }
   end
 
@@ -63,7 +63,7 @@ defmodule ClipboardWeb.Topic.UserListLive do
   end
 
   defp list_present(socket) do
-    Presence.list("topic:#{socket.assigns.topic_id}")
+    Presence.list("topic_users:#{socket.assigns.topic_id}")
     |> IO.inspect()
     # %{
     #   "0b20d480-5c21-4141-ac1e-9c74caf06784" => %{

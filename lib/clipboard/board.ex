@@ -58,7 +58,7 @@ defmodule Clipboard.Board do
 
   def create_topic do
     %Topic{}
-    |> Topic.changeset(%{title: Clipboard.TopicTitleGenerator.generate()})
+    |> Topic.changeset(%{title: Clipboard.TextGenerator.generate_title()})
     |> Repo.insert()
   end
 

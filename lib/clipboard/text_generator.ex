@@ -1,6 +1,6 @@
 # thanks!
 # https://gist.github.com/coryodaniel/d5e8fa15b3d1fe566b3c3f821225936e
-defmodule Clipboard.TopicTitleGenerator do
+defmodule Clipboard.TextGenerator do
   @adjectives ~w(
     autumn hidden bitter misty silent empty dry dark summer
     icy delicate quiet white cool spring winter patient
@@ -28,10 +28,16 @@ defmodule Clipboard.TopicTitleGenerator do
     notes notepad ideas thoughts clipboard
   )
 
-  def generate() do
+  def generate_title() do
     adjective = @adjectives |> Enum.random
     noun = @nouns |> Enum.random
     thing = @things |> Enum.random
     "a #{adjective} #{noun}'s #{thing}"
+  end
+
+  def generate_name() do
+    adjective = @adjectives |> Enum.random
+    noun = @nouns |> Enum.random
+    "#{adjective} #{noun}"
   end
 end

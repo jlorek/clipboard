@@ -29,7 +29,8 @@ defmodule ClipboardWeb.Topic.ShowTopicLive do
     <h1><%= @topic_title %> 🐣</h1>
     <div>
       <%= live_render(@socket, UserListLive, id: "user_list", session: %{"topic_id" => assigns.topic_id}) %>
-      <%= live_component(@socket, ClipboardLive, id: "clipboard", topic_id: assigns.topic_id) %>
+      <%= live_render(@socket, ClipboardLive, id: "clipboard", session: %{"topic_id" => assigns.topic_id}) %>
+
       <%= live_component(@socket, ClipboardViewLive, id: "clipboard_view") %>
     </div>
     <h4>Debug Data</h4>

@@ -32,7 +32,10 @@ export default {
                 // https://elixirforum.com/t/liveview-event-targeting-in-0-5x/28354
                 // component events are sent to parent by default
                 // https://github.com/surface-ui/surface/issues/20
-                this.pushEventTo(`#${this.el.id}`, "paste", data)
+                // this.pushEventTo(`#${this.el.id}`, "paste", data)
+
+                // clipboard was promoted from component to own live_view
+                this.pushEvent("paste", data)
             });
         }
     }
