@@ -1,4 +1,4 @@
-defmodule ClipboardWeb.UserListLive do
+defmodule ClipboardWeb.Topic.UserListLive do
   # is a separate live_view to
   # implement it's own handle_info
   # for detecting presence changes

@@ -1,4 +1,4 @@
-defmodule ClipboardWeb.ClipboardLive do
+defmodule ClipboardWeb.Topic.ClipboardLive do
   use ClipboardWeb, :live_component
   alias Clipboard.Board.Post
 
@@ -60,24 +60,25 @@ defmodule ClipboardWeb.ClipboardLive do
     {:noreply, socket}
   end
 
+  # new data arrives from one client
   def handle_event(
         "paste",
         %{"base64" => base64, "mimetype" => mimetype, "filename" => filename},
         socket
       ) do
-
-    Clipboard.Board.upsert_post(%{
-      topic_id: socket.assigns.topic_id,
-      data: base64,
-      mimetype: mimetype,
-      filename: filename
-    })
+    {:ok, post} =
+      Clipboard.Board.upsert_post(%{
+        topic_id: socket.assigns.topic_id,
+        data: base64,
+        mimetype: mimetype,
+        filename: filename
+      })
 
     socket =
       socket
-      |> assign(:base64, base64)
-      |> assign(:mimetype, mimetype)
-      |> assign(:filename, filename)
+      |> assign(:base64, post.data)
+      |> assign(:mimetype, post.mimetype)
+      |> assign(:filename, post.filename)
 
     {:noreply, socket}
   end

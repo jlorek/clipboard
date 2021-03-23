@@ -1,5 +1,6 @@
-defmodule ClipboardWeb.TopicLive do
+defmodule ClipboardWeb.Topic.ShowTopicLive do
   use ClipboardWeb, :live_view
+  alias ClipboardWeb.Topic.{UserListLive, ClipboardLive, ClipboardViewLive}
 
   def mount(params = %{"topic_id" => topic_id}, _session, socket) do
     topic = Clipboard.Board.get_topic!(topic_id)
@@ -27,9 +28,9 @@ defmodule ClipboardWeb.TopicLive do
     ~L"""
     <h1><%= @topic_title %> 🐣</h1>
     <div>
-      <%= live_render(@socket, ClipboardWeb.UserListLive, id: "user_list", session: %{"topic_id" => assigns.topic_id}) %>
-      <%= live_component(@socket, ClipboardWeb.ClipboardLive, id: "clipboard", topic_id: assigns.topic_id) %>
-      <%= live_component(@socket, ClipboardWeb.ClipboardViewLive, id: "clipboard_view") %>
+      <%= live_render(@socket, UserListLive, id: "user_list", session: %{"topic_id" => assigns.topic_id}) %>
+      <%= live_component(@socket, ClipboardLive, id: "clipboard", topic_id: assigns.topic_id) %>
+      <%= live_component(@socket, ClipboardViewLive, id: "clipboard_view") %>
     </div>
     <h4>Debug Data</h4>
     <pre>

@@ -162,9 +162,12 @@ defmodule Clipboard.Board do
     |> Repo.insert()
   end
 
-  def upsert_post(attrs \\ %{}) do
-    case Repo.get_by(Post, topic_id: attrs.topic_id) do
-      nil -> %Post{topic_id: attrs.topic_id}
+  @doc """
+  Create or update a post for a given topic_id
+  """
+  def upsert_post(attrs = %{topic_id: topic_id}) do
+    case Repo.get_by(Post, topic_id: topic_id) do
+      nil -> %Post{topic_id: topic_id}
       existing -> existing
     end
     |> Post.changeset(attrs)

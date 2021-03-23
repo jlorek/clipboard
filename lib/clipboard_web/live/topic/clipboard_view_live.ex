@@ -1,4 +1,4 @@
-defmodule ClipboardWeb.ClipboardViewLive do
+defmodule ClipboardWeb.Topic.ClipboardViewLive do
   use ClipboardWeb, :live_component
 
   def mount(socket) do

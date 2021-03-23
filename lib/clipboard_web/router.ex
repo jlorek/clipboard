@@ -19,7 +19,7 @@ defmodule ClipboardWeb.Router do
 
     live "/", WelcomeLive, :index
     #live "/topic/new", TopicLive, :new
-    live "/topic/:topic_id", TopicLive, :existing
+    live "/topic/:topic_id", Topic.ShowTopicLive, :existing
 
     live "/counter", CounterLive, :index
     live "/parent", ParentLive, :index
