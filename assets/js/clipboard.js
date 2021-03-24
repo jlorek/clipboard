@@ -12,7 +12,7 @@ function setupPasteListener(callback) {
 async function onPaste(event) {
     // required?
     event.preventDefault();
-    console.log("this.pasteCallback", pasteCallback);
+    // console.log("this.pasteCallback", pasteCallback);
 
     // const clipboardData = (event.clipboardData || window.clipboardData)
     if (!event.clipboardData) {
@@ -45,7 +45,6 @@ async function onPaste(event) {
                     base64: "data:text/plain;base64," + Base64.encode(text),
                     data: text
                 });
-                //window.socketMessenger.sendText(mimeType, text);
                 return;
             }
         }
@@ -60,15 +59,9 @@ async function onPaste(event) {
                     base64: file.base64,
                     data: file.base64
                 });
-                //window.socketMessenger.sendFile(mimeType, file.name, file.base64)
                 return;
             }
         }
-
-        // if (data) {
-        //   window.socketMessenger.pasteClipboard(mimeType, data);
-        //   return;
-        // }
     }
     console.log("No suitable paste data found.")
 }
@@ -94,7 +87,7 @@ function compareDataTransferItems(a, b) {
 
 async function readText(dataTransferItem) {
     var text = await toString(dataTransferItem);
-    console.log("Got text from paste", text);
+    // console.log("Got text from paste", text);
     return text;
 }
 
@@ -107,11 +100,11 @@ async function readFile(dataTransferItem) {
         return undefined;
     }
     if (file.size === 0) {
-        console.log("File size is undefined, maybe an unsynced cloud drive file.");
+        console.warn("File size is undefined, maybe an unsynced cloud drive file.");
         return undefined;
     }
     var base64 = await toBase64(file);
-    console.log("File content", base64);
+    // console.log("File content", base64);
     return { name: file.name, base64: base64 };
 }
 

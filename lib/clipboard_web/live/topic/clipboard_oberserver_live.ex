@@ -1,4 +1,4 @@
-defmodule ClipboardWeb.Topic.ClipboardLive do
+defmodule ClipboardWeb.Topic.ClipboardObserver do
   use ClipboardWeb, :live_view
 
   alias Clipboard.Board.Post
@@ -48,9 +48,9 @@ defmodule ClipboardWeb.Topic.ClipboardLive do
         $store.clipboard.mimetype = mimetype;
         $store.clipboard.filename = filename;
         // setup watcher for future values
-        $watch('base64', value => { $store.clipboard.base64 = value; $store.clipboard.newdata = true; });
-        $watch('mimetype', value => { $store.clipboard.mimetype = value; $store.clipboard.newdata = true; });
-        $watch('filename', value => { $store.clipboard.filename = value; $store.clipboard.newdata = true; });">
+        $watch('base64', value => { $store.clipboard.base64 = value });
+        $watch('mimetype', value => { $store.clipboard.mimetype = value });
+        $watch('filename', value => { $store.clipboard.filename = value });">
     </template>
     """
   end

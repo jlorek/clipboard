@@ -23,6 +23,9 @@ import 'alpinejs'
 import { initStore } from "./store.js"
 initStore();
 
+import { initGlobals } from "./globals.js"
+initGlobals();
+
 import Hooks from "./hooks.js"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
