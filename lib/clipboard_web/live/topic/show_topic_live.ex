@@ -2,6 +2,8 @@ defmodule ClipboardWeb.Topic.ShowTopicLive do
   use ClipboardWeb, :live_view
   alias ClipboardWeb.Topic.{UserListLive, ClipboardObserver, ClipboardViewLive, ClipboardDataLive}
 
+  def show_debug, do: false
+
   def mount(params = %{"topic_id" => topic_id}, _session, socket) do
     topic = Clipboard.Board.get_topic!(topic_id)
 
@@ -32,10 +34,12 @@ defmodule ClipboardWeb.Topic.ShowTopicLive do
       <%= live_render(@socket, ClipboardObserver, id: "clipboard", session: %{"topic_id" => assigns.topic_id}) %>
       <%= live_component(@socket, ClipboardDataLive, id: "clipboard_data") %>
       </div>
-      <h4>Debug Data</h4>
-      <pre>
-      @live_action = <%= @live_action %>
-      </pre>
+      <%= if (show_debug) do %>
+        <h4>Debug Data</h4>
+        <pre style="white-space: pre-wrap; overflow-wrap: break-word;">
+        @live_action = <%= @live_action %>
+        </pre>
+      <% end %>
       """
   end
 end

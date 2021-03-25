@@ -21,7 +21,9 @@ defmodule ClipboardWeb.Topic.ClipboardDataLive do
         <img x-show="$store.clipboard.mimetype.startsWith('image/')"
              x-bind:src="$store.clipboard.base64"></pre>
 
-        <button @click="document.execCommand('paste');">Paste to cloud</button>
+        <button
+          class="p-4 bg-blue-600 rounded text-white font-bold hover:bg-blue-500"
+          @click="document.execCommand('paste');">Paste to cloud</button>
 
         <button x-show="$store.clipboard.mimetype.startsWith('text/')"
                 x-on:click="
