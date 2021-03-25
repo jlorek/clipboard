@@ -9,20 +9,29 @@
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-  <body>
+  <body class="font-sans">
     root.html.leex
-    <header>
-      <h1 class="text-teal-500 text-5xl font-bold text-center">clipboard.to</h1>
+    <header class="flex justify-center">
       <img src="<%= Routes.static_path(@conn, "/images/clipboard.png") %>" alt="Clipboard Logo"/>
-        <nav>
-          <ul>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
-        </nav>
-      </section>
+      <nav>
+        <ul>
+          <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+            <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+          <% end %>
+        </ul>
+      </nav>
     </header>
-    <%= @inner_content %>
+    <div class="flex flex-row">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    </div>
+    <main>
+      <%= @inner_content %>
+    </main>
+
+    <footer>
+
+    </footer>
   </body>
 </html>

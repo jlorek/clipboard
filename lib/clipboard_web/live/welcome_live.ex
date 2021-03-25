@@ -13,11 +13,4 @@ defmodule ClipboardWeb.WelcomeLive do
 
     {:noreply, socket}
   end
-
-  def render(assigns) do
-    ~L"""
-    <h1>Welcome 👋</h1>
-    <button phx-click="new_topic">New Clipboard</button>
-    """
-  end
 end
