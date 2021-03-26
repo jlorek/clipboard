@@ -12,7 +12,7 @@
     <div>
     <%# border-t-2 border-b-2 border-black %>
         <textarea
-            class="w-full h-48 p-1 font-mono text-base text-black bg-gray-100 resize-y focus:outline-none"
+            class="w-full h-48 p-1 font-mono text-base bg-gray-100 resize-y disabled:text-black focus:outline-none"
             x-show="$store.clipboard.mimetype.startsWith('text/')"
             x-text="Utils.decodeDataUrl($store.clipboard.base64)"
             disabled></textarea>
