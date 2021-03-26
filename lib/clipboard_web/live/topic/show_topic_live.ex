@@ -1,6 +1,6 @@
 defmodule ClipboardWeb.Topic.ShowTopicLive do
   use ClipboardWeb, :live_view
-  alias ClipboardWeb.Topic.{UserListLive, ClipboardObserver, ClipboardViewLive, ClipboardDataLive}
+  alias ClipboardWeb.Topic.{UserListLive, ClipboardObserver, ClipboardDataLive, ShareLinkLive}
 
   def show_debug, do: false
 
@@ -13,7 +13,6 @@ defmodule ClipboardWeb.Topic.ShowTopicLive do
       |> assign(:page_title, topic.title)
       |> assign(:topic_id, topic.id)
       |> assign(:topic_title, topic.title)
-      |> assign(:topic_url, Routes.show_topic_url(socket, :existing, topic.id))
 
     {:ok, socket}
   end

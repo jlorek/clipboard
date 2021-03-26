@@ -25,6 +25,30 @@ function decodeDataUrl(dataUrl) {
     return false;
 }
 
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share
+ */
+async function tryOpenShareSheet(url, title, text) {
+    let data = {
+        url: url,
+        title: title,
+        text: text
+    };
+
+    if (!navigator.share) {
+        return false;
+    }
+    
+    try {
+        await navigator.share(data);
+        return true;
+    } catch (err) {
+        console.warn("Could not share data.", err);
+        return false;
+    }
+}
+
 export {
-    decodeDataUrl
+    decodeDataUrl,
+    tryOpenShareSheet
 }

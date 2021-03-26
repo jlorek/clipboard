@@ -1,11 +1,6 @@
 <div class="flex flex-col space-y-2">
     <div class="text-3xl"><%= random_notes_emoji %> <%= @topic_title %></div>
-    <div>Open this link on any device to access or share your cloud clipboard (click to copy):
-        <span class="cursor-pointer hover:underline"
-              x-data="{url: '<%= @topic_url %>'}"
-              x-on:click="$clipboard(url)"
-              x-text="url"></span>
-    </div>
+    <%= live_component(@socket, ShareLinkLive, topic_id: assigns.topic_id) %>
     <%= live_render(@socket, ClipboardObserver, id: "clipboard", session: %{"topic_id" => assigns.topic_id}) %>
     <%= live_component(@socket, ClipboardDataLive, id: "clipboard_data") %>
     <%= live_render(@socket, UserListLive, id: "user_list", session: %{"topic_id" => assigns.topic_id}) %>

@@ -1,0 +1,6 @@
+<div id="<%= @id %>">
+    <div>Who is watching?</div>
+    <%= for other <- @connected_users do %>
+    <span><%= other.name %><%= if other.uuid == @user.uuid do %> (it's you)<% end %> · </span>
+    <% end %>
+</div>

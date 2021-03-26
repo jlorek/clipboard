@@ -1,6 +1,6 @@
 import { copyToClipboard } from "./clipboard"
 import { Base64 } from "js-base64";
-import { decodeDataUrl } from "./utils.js"
+import { decodeDataUrl, tryOpenShareSheet } from "./utils.js"
 
 function initGlobals() {
     window.Base64 = Base64;
@@ -11,7 +11,7 @@ function initGlobals() {
         }
     };
 
-    window.Utils = { decodeDataUrl };
+    window.Utils = { decodeDataUrl, tryOpenShareSheet };
 }
 
 export {

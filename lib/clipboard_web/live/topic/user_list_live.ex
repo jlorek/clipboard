@@ -33,21 +33,6 @@ defmodule ClipboardWeb.Topic.UserListLive do
     {:ok, socket}
   end
 
-  def render(assigns) do
-    ~L"""
-    <div id="<%= @id %>">
-      <h3>Connected users</h3>
-      <ul>
-      <%= for other <- @connected_users do %>
-        <li><%= other.name %><%= if other.uuid == @user.uuid do %> (it's you)<% end %></li>
-      <% end %>
-      </ul>
-    </div>
-    """
-  end
-
-  # <%= if other.uuid == @user.uuid do %> (it's you)<% end %></li>
-
   defp create_connected_user do
     %{
       uuid: UUID.uuid4(),
