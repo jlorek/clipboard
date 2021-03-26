@@ -28,17 +28,16 @@ function decodeDataUrl(dataUrl) {
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share
  */
-async function tryOpenShareSheet(url, title, text) {
+async function tryNativeShare(url) {
     let data = {
         url: url,
-        title: title,
-        text: text
+        text: "Join my shared clipboard!"
     };
 
     if (!navigator.share) {
         return false;
     }
-    
+
     try {
         await navigator.share(data);
         return true;
@@ -50,5 +49,5 @@ async function tryOpenShareSheet(url, title, text) {
 
 export {
     decodeDataUrl,
-    tryOpenShareSheet
+    tryNativeShare
 }

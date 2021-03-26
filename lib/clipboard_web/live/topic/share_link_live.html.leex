@@ -1,6 +1,6 @@
 <div>Open this link on any device to access or share your cloud clipboard (click to copy):
     <span class="cursor-pointer hover:underline"
             x-data="{url: '<%= Routes.show_topic_url(@socket, :existing, @topic_id) %>'}"
-            x-on:click="if (!Utils.tryOpenShareSheet(url, 'some title', 'some text')) $clipboard(url)"
+            x-on:click="$clipboard(url); Utils.tryNativeShare(url)"
             x-text="url"></span>
 </div>

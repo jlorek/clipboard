@@ -40,6 +40,6 @@ defmodule Clipboard.TextGenerator do
 
   def generate_title(name) do
     thing = @things |> Enum.random()
-    "a #{name}'s #{thing}"
+    "#{name}'s #{thing}"
   end
 end
