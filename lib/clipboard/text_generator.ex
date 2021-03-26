@@ -28,16 +28,18 @@ defmodule Clipboard.TextGenerator do
     notes notepad ideas thoughts clipboard
   )
 
-  def generate_title() do
-    adjective = @adjectives |> Enum.random
-    noun = @nouns |> Enum.random
-    thing = @things |> Enum.random
-    "a #{adjective} #{noun}'s #{thing}"
+  def generate_name() do
+    adjective = @adjectives |> Enum.random()
+    noun = @nouns |> Enum.random()
+    "#{adjective} #{noun}"
   end
 
-  def generate_name() do
-    adjective = @adjectives |> Enum.random
-    noun = @nouns |> Enum.random
-    "#{adjective} #{noun}"
+  def generate_title() do
+    generate_name() |> generate_title()
+  end
+
+  def generate_title(name) do
+    thing = @things |> Enum.random()
+    "a #{name}'s #{thing}"
   end
 end

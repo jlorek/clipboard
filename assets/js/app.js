@@ -17,6 +17,7 @@ import { Socket } from "phoenix"
 import NProgress from "nprogress"
 import { LiveSocket } from "phoenix_live_view"
 
+import "@ryangjchandler/alpine-clipboard"
 import '@ryangjchandler/spruce'
 import 'alpinejs'
 

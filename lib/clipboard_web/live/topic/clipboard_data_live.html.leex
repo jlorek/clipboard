@@ -1,0 +1,44 @@
+<div id="<%= @id %>"
+        x-data
+        x-subscribe>
+
+    <div class="flex flex-col space-y-2"
+        x-show="$store.clipboard.base64 != ''">
+
+    <button
+        class="button"
+        @click="document.execCommand('paste');">Paste to cloud (or press CMD + V)</button>
+
+    <div>
+        <textarea
+            class="w-full h-48 p-1 font-mono text-base bg-gray-100 border-t-2 border-b-2 border-black focus:outline-none"
+            x-show="$store.clipboard.mimetype.startsWith('text/')"
+            x-text="Utils.decodeDataUrl($store.clipboard.base64)">hello</textarea>
+
+        <img class="object-scale-down"
+             x-show="$store.clipboard.mimetype.startsWith('image/')"
+             x-bind:src="$store.clipboard.base64"></pre>
+
+        <%# why extra gap at bottom? %>
+    </div>
+
+    <button class="button"
+            x-show="$store.clipboard.mimetype.startsWith('text/')"
+            x-on:click="
+                Clipboard.copyToClipboard(Utils.decodeDataUrl($store.clipboard.base64));
+                $store.clipboard.newdata = false;"
+            x-text="'Copy text to local clipboard ' + ($store.clipboard.newdata ? '' : '✔️')"></button>
+
+    <a class="button"
+        x-show="$store.clipboard.filename != ''"
+        x-bind:download="$store.clipboard.filename"
+        x-bind:href="$store.clipboard.base64"
+        x-text="`Download file (${$store.clipboard.filename})`"></a>
+
+    <%= if (show_debug) do %>
+    <pre x-text="JSON.stringify($store.clipboard)"
+            style="white-space: pre-wrap; overflow-wrap: break-word;"</pre>
+    <% end%>
+
+    </div>
+</div>

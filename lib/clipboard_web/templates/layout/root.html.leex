@@ -4,34 +4,30 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href="/favicon.png">
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "Clipboard", suffix: " · Phoenix Framework" %>
+    <%= live_title_tag assigns[:page_title] || "new", prefix: "clipboard.to · " %>
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-  <body class="font-sans">
-    root.html.leex
-    <header class="flex justify-center">
-      <img src="<%= Routes.static_path(@conn, "/images/clipboard.png") %>" alt="Clipboard Logo"/>
+  <body class="font-sans bg-blue-100">
+    <header class="flex justify-between mt-4 ml-4 mr-4">
+      <img class="self-center w-10 h-10" src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Clipboard Logo"/>
+      <div class="font-serif text-5xl text-gray-600">clipboard.to</div>
       <nav>
-        <ul>
+        <ul class="text-right">
           <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
             <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+            <li><%= link "Home", to: Routes.welcome_path(@conn, :index) %></li>
           <% end %>
         </ul>
       </nav>
     </header>
-    <div class="flex flex-row">
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    </div>
-    <main>
-      <%= @inner_content %>
-    </main>
-
+    <%= @inner_content %>
     <footer>
-
+      <div class="fixed w-full text-center text-gray-400 bottom-5">
+        crafted with <a target="_blank" href="https://elixir-lang.org">♥️</a> and <a target="_blank" href="https://phoenixframework.org">🔥🐦</a> by <a target="_blank" href="https://github.com/jlorek">jlorek.net</a>
+      </div>
     </footer>
   </body>
 </html>

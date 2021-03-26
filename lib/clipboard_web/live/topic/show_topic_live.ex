@@ -9,37 +9,15 @@ defmodule ClipboardWeb.Topic.ShowTopicLive do
 
     socket =
       socket
+      # page_title in root.html.leex
+      |> assign(:page_title, topic.title)
       |> assign(:topic_id, topic.id)
       |> assign(:topic_title, topic.title)
+      |> assign(:topic_url, Routes.show_topic_url(socket, :existing, topic.id))
 
     {:ok, socket}
   end
 
-  # # socket.assigns.live_action guard?
-  # def mount(_params, _session, socket = %{assigns: %{live_action: :new}}) do
-  #   socket =
-  #     case Clipboard.Board.create_topic() do
-  #       {:ok, topic} -> redirect(socket, to: Routes.topic_path(socket, :existing, topic.id))
-  #       {:error, _} -> raise "Could not created new topic"
-  #     end
+  def random_notes_emoji, do: ["📝", "🗒", "📓", "📘", "📕", "📒", "📔", "📗", "📙"] |> Enum.random()
 
-  #   {:ok, socket}
-  # end
-
-  def render(assigns) do
-    ~L"""
-    <h1><%= @topic_title %> 🐣</h1>
-    <div>
-      <%= live_render(@socket, UserListLive, id: "user_list", session: %{"topic_id" => assigns.topic_id}) %>
-      <%= live_render(@socket, ClipboardObserver, id: "clipboard", session: %{"topic_id" => assigns.topic_id}) %>
-      <%= live_component(@socket, ClipboardDataLive, id: "clipboard_data") %>
-      </div>
-      <%= if (show_debug) do %>
-        <h4>Debug Data</h4>
-        <pre style="white-space: pre-wrap; overflow-wrap: break-word;">
-        @live_action = <%= @live_action %>
-        </pre>
-      <% end %>
-      """
-  end
 end
