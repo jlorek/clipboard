@@ -10,10 +10,12 @@
         @click="document.execCommand('paste');">Paste to cloud (or press CMD + V)</button>
 
     <div>
+    <%# border-t-2 border-b-2 border-black %>
         <textarea
-            class="w-full h-48 p-1 font-mono text-base bg-gray-100 border-t-2 border-b-2 border-black focus:outline-none"
+            class="w-full h-48 p-1 font-mono text-base text-black bg-gray-100 resize-y focus:outline-none"
             x-show="$store.clipboard.mimetype.startsWith('text/')"
-            x-text="Utils.decodeDataUrl($store.clipboard.base64)">hello</textarea>
+            x-text="Utils.decodeDataUrl($store.clipboard.base64)"
+            disabled></textarea>
 
         <img class="object-scale-down"
              x-show="$store.clipboard.mimetype.startsWith('image/')"
