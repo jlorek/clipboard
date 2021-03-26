@@ -23,4 +23,15 @@ defmodule Clipboard.Board.Post do
     # The mediatype is a MIME type string, such as 'image/jpeg' for a JPEG image file. If omitted, defaults to text/plain;charset=US-ASCII
     |> validate_required([:data, :filename, :topic_id])
   end
+
+  def empty_dummy() do
+    welcome_message =
+      Base.encode64("Your cloud clipboard is ready! Try pasting text, images or files ✌️")
+
+    %Clipboard.Board.Post{
+      data: "data:text/plain;base64,#{welcome_message}",
+      filename: "welcome.txt",
+      mimetype: "text/plain"
+    }
+  end
 end

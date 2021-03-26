@@ -13,7 +13,7 @@ defmodule ClipboardWeb.Topic.ClipboardObserver do
 
     existing_or_empty =
       case Clipboard.Board.get_post_for_topic(topic_id) do
-        nil -> %Post{}
+        nil -> Post.empty_dummy()
         existing -> existing
       end
 
