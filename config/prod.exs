@@ -59,7 +59,7 @@ config :clipboard, ClipboardWeb.Endpoint,
   # url: [host: System.get_env("APP_NAME") <> ".gigalixirapp.com", port: 443],
   url: [host: "clipboard.to", port: 443],
   # https://gigalixir.readthedocs.io/en/latest/domain.html#how-to-set-up-ssl-tls
-  force_ssl: [rewrite_on: [:x_forwarded_proto]]
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
   server: true,
   check_origin: false,
