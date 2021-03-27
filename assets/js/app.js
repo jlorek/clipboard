@@ -45,6 +45,9 @@ let liveSocket = new LiveSocket("/live", Socket, {
     hooks: Hooks
 })
 
+// Thanks, but no spinner
+NProgress.configure({ showSpinner: false });
+
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", info => NProgress.start())
 window.addEventListener("phx:page-loading-stop", info => NProgress.done())

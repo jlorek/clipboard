@@ -17,3 +17,7 @@ body {
 .button {
   @apply p-2 rounded bg-purple-300 hover:bg-pink-300 text-white text-center;
 }
+
+.nav-button {
+  @apply p-1 rounded bg-yellow-400 hover:bg-yellow-300 text-white text-center text-sm pl-2 pr-2;
+}

@@ -1,8 +1,7 @@
-defmodule ClipboardWeb.WelcomeLive do
+defmodule ClipboardWeb.FaqLive do
   use ClipboardWeb, :live_view
 
   def mount(_params, _session, socket) do
-    socket = socket |> assign(:slogan, Clipboard.SloganGenerator.generate_slogan)
     {:ok, socket}
   end
 

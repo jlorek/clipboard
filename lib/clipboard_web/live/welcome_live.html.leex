@@ -1,8 +1,10 @@
 <div class="flex flex-col space-y-4">
-    <div class="text-3xl">👋 Hello</div>
-    <div class="text-xl">Want to share clipboard data between devices without extra tools?</div>
-    <div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-    <div>And always remember:</div>
-    <div class="text-xl"><%= Clipboard.SloganGenerator.generate_slogan %></div>
-    <button class="button" phx-click="new_topic">Create shared Clipboard</button>
+    <div class="text-3xl">👋 Hello, Clipboard!</div>
+    <div class="text-xl">A live clipboard to share text and files between devices without any extra tools.</div>
+    <div>Say hello to Clipboard. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+    <div>
+        <div>And always remember:</div>
+        <div class="text-xl"><%= @slogan %></div>
+    </div>
+    <button class="button" phx-click="new_topic">Okay, create my Clipboard!</button>
 </div>
