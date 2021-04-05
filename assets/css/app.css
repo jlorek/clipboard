@@ -21,3 +21,16 @@ body {
 .nav-button {
   @apply p-1 rounded bg-yellow-400 hover:bg-yellow-300 text-white text-center text-sm pl-2 pr-2;
 }
+
+/* Hide Phoenix LiveView iFrame */
+iframe {
+  display:none
+}
+
+#pocket-extension-root {
+  display:none
+}
+
+#pocket-extension-styles {
+  display:none
+}

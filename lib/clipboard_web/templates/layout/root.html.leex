@@ -10,8 +10,8 @@
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-  <body class="font-sans bg-blue-100">
-    <header class="flex items-center justify-between mt-2 mb-2 ml-2 mr-2">
+  <body class="flex flex-col justify-between h-screen font-sans bg-blue-100">
+    <header class="flex items-center justify-between m-2">
       <img class="self-center w-8 h-8" src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Clipboard Logo"/>
       <%# <div class="font-serif text-5xl text-gray-600">clipboard.to</div> %>
       <nav>
@@ -24,9 +24,14 @@
         </ul>
       </nav>
     </header>
-    <%= @inner_content %>
-    <footer>
-      <div class="fixed w-full text-center text-gray-400 bottom-5">
+
+    <%# flex-1 must be set on a non-phx-controlled element %>
+    <main class="flex-1 pl-2 pr-2">
+      <%= @inner_content %>
+    </main>
+
+    <footer class="m-2">
+      <div class="text-center text-gray-400 ">
         crafted with <a target="_blank" href="https://elixir-lang.org">♥️</a> and <a target="_blank" href="https://phoenixframework.org">🔥🐦</a> by <a target="_blank" href="https://github.com/jlorek">jlorek.net</a>
       </div>
     </footer>

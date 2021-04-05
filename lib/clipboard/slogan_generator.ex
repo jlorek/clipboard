@@ -108,7 +108,6 @@ defmodule Clipboard.SloganGenerator do
     "I trust <%= what %>.",
     "When the going gets tough, the tough get <%= what %>.",
     "<%= what %> is the only way to be happy.",
-    "Buy <%= what %> now!",
     "No need to worry with <%= what %>.",
     "The joy of <%= what %>.",
     "Me and my <%= what %>.",
