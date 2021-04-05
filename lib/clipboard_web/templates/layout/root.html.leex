@@ -10,10 +10,9 @@
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-  <body class="flex flex-col justify-between h-screen font-sans bg-blue-100">
+  <body class="flex flex-col justify-between h-screen font-sans bg-three-light">
     <header class="flex items-center justify-between m-2">
       <img class="self-center w-8 h-8" src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Clipboard Logo"/>
-      <%# <div class="font-serif text-5xl text-gray-600">clipboard.to</div> %>
       <nav>
         <ul class="flex flex-row space-x-4">
           <li class="nav-button"><%= live_redirect "Home", to: Routes.welcome_path(@conn, :index) %></li>
@@ -31,7 +30,7 @@
     </main>
 
     <footer class="m-2">
-      <div class="text-center text-gray-400 ">
+      <div class="text-center text-font-dark ">
         crafted with <a target="_blank" href="https://elixir-lang.org">♥️</a> and <a target="_blank" href="https://phoenixframework.org">🔥🐦</a> by <a target="_blank" href="https://github.com/jlorek">jlorek.net</a>
       </div>
     </footer>
