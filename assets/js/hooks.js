@@ -3,7 +3,9 @@ import { setupPasteListener } from "./clipboard"
 export default {
     clipboard: {
         mounted() {
-            console.log("hook mounted for 'clipboard'", this.el)
+            console.log("hook mounted for 'clipboard'", this.el);
+            window.hooks = window.hooks || {};
+            window.hooks.clipboard = this;
 
             setupPasteListener((data) => {
                 // console.log("paste listener received data", data);
@@ -15,8 +17,15 @@ export default {
                 // this.pushEventTo(`#${this.el.id}`, "paste", data)
 
                 // clipboard was promoted from component to own live_view
-                this.pushEvent("paste", data)
+                this.upload(data);
             });
+        },
+
+        /**
+         * @param {Object} data - { filename, mimetype, base64 }
+         */
+        upload(data) {
+            this.pushEvent("paste", data)
         }
     },
 

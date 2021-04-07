@@ -9,6 +9,16 @@
         class="button"
         @click="document.execCommand('paste');">Paste to cloud (or press CMD + V)</button>
 
+    <label for="file-upload" class="button">
+        File or Camera
+    </label>
+    <input id="file-upload"
+           class="hidden"
+           x-on:change="Utils.readLocalFile($event)"
+           type="file"
+           accept="image/*"
+           capture/>
+
     <div>
     <%# border-t-2 border-b-2 border-black %>
         <textarea
