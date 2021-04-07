@@ -4,12 +4,14 @@ defmodule ClipboardWeb.Topic.ClipboardObserver do
   alias Clipboard.Board.Post
   alias Phoenix.Socket.Broadcast
 
+  @impl true
   def mount(_params, _session = %{"topic_id" => topic_id}, socket) do
     # IO.inspect(params, label: "clipboard_live/params")
     # IO.inspect(session, label: "clipboard_live/session")
     # IO.inspect(socket, label: "clipboard_live/socket")
 
-    Phoenix.PubSub.subscribe(Clipboard.PubSub, "topic_paste:#{topic_id}")
+    if connected?(socket),
+      do: Phoenix.PubSub.subscribe(Clipboard.PubSub, "topic_paste:#{topic_id}")
 
     existing_or_empty =
       case Clipboard.Board.get_post_for_topic(topic_id) do
@@ -30,6 +32,7 @@ defmodule ClipboardWeb.Topic.ClipboardObserver do
     {:ok, socket}
   end
 
+  @impl true
   def render(assigns) do
     # assigns.id gets assigned from live_component call (in TopicLive)
     ~L"""

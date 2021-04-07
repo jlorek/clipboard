@@ -1,7 +1,7 @@
 <div id="<%= @id %>">
-    <div>Who is watching?</div>
+    <div><%= Enum.count(@connected_users) %> Connected device<%= if Enum.count(@connected_users) > 1 do %>s<% end %></div>
     <%= for other <- @connected_users do %>
     <%# this List.last thing should be done another way... %>
-    <span><%= other.name %><%= if other.uuid == @user.uuid do %> (it's you)<% end %><%= if other != List.last(@connected_users) do %> · <% end %></span>
+    <span><%= other.device %><%= if other.uuid == @user.uuid do %> (it's you)<% end %><%= if other != List.last(@connected_users) do %> · <% end %></span>
     <% end %>
 </div>

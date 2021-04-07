@@ -7,21 +7,19 @@ defmodule ClipboardWeb.Topic.UserListLive do
   alias ClipboardWeb.Presence
   alias Phoenix.Socket.Broadcast
 
-  def mount(params, session = %{"topic_id" => topic_id}, socket) do
+  @impl true
+  def mount(_params, session = %{"topic_id" => topic_id}, socket) do
     # IO.inspect(params, label: "user_list_live/params")
     # IO.inspect(session, label: "user_list_live/session")
     # IO.inspect(socket, label: "user_list_live/socket")
 
+    user = create_connected_user(session)
+
     # Clipboard.PubSub is defined in application.ex children
-    Phoenix.PubSub.subscribe(Clipboard.PubSub, "topic_users:#{topic_id}")
-
-    user = create_connected_user()
-
-    {:ok, _} =
-      Presence.track(self(), "topic_users:#{topic_id}", user.uuid, %{
-        name: user.name,
-        online_at: inspect(System.system_time(:second))
-      })
+    if connected?(socket) do
+      Phoenix.PubSub.subscribe(Clipboard.PubSub, "topic_users:#{topic_id}")
+      {:ok, _} = Presence.track(self(), "topic_users:#{topic_id}", user.uuid, user)
+    end
 
     socket =
       socket
@@ -33,10 +31,12 @@ defmodule ClipboardWeb.Topic.UserListLive do
     {:ok, socket}
   end
 
-  defp create_connected_user do
+  defp create_connected_user(%{"device" => device}) do
     %{
       uuid: UUID.uuid4(),
-      name: Clipboard.TextGenerator.generate_name()
+      device: device,
+      name: Clipboard.TextGenerator.generate_name(),
+      online_since: inspect(System.system_time(:second)),
     }
   end
 

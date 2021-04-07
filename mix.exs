@@ -47,7 +47,8 @@ defmodule Clipboard.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:uuid, "~> 1.1"}
+      {:uuid, "~> 1.1"},
+      {:ua_parser, "~> 1.8"}
     ]
   end
 

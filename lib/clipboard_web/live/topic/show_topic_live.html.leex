@@ -1,11 +1,11 @@
 <div class="flex flex-col space-y-2">
-    <div class="text-3xl"><%= random_notes_emoji %> <%= @topic_title %></div>
+    <div class="text-3xl"><%= random_notes_emoji() %> <%= @topic_title %></div>
     <%= live_component(@socket, ShareLinkLive, topic_id: assigns.topic_id) %>
     <%= live_render(@socket, ClipboardObserver, id: "clipboard", session: %{"topic_id" => assigns.topic_id}) %>
     <%= live_component(@socket, ClipboardDataLive, id: "clipboard_data") %>
     <%= live_render(@socket, UserListLive, id: "user_list", session: %{"topic_id" => assigns.topic_id}) %>
 </div>
-<%= if (show_debug) do %>
+<%= if (show_debug()) do %>
 <div>Debug Data</div>
 <div>@live_action = <%= @live_action %></div>
 <% end %>
