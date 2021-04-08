@@ -10,10 +10,16 @@ defmodule ClipboardWeb.Plugs.UserAgentPlug do
       |> List.first()
       |> UAParser.parse()
 
-    # IO.inspect(ua, label: "User Agent")
+    # |> IO.inspect(label: "User Agent")
+
+    device =
+      case ua.os.family do
+        nil -> "Other"
+        family -> family
+      end
 
     # Thanks!
     # https://github.com/phoenixframework/phoenix_live_view/issues/631#issuecomment-586172734
-    conn |> put_session(:device, ua.os.family)
+    conn |> put_session(:device, device)
   end
 end

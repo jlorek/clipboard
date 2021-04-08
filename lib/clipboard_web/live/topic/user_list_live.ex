@@ -36,7 +36,7 @@ defmodule ClipboardWeb.Topic.UserListLive do
       uuid: UUID.uuid4(),
       device: device,
       name: Clipboard.TextGenerator.generate_name(),
-      online_since: inspect(System.system_time(:second)),
+      online_since: System.system_time(:second),
     }
   end
 
@@ -61,5 +61,29 @@ defmodule ClipboardWeb.Topic.UserListLive do
     # Phoenix Presence provides nice metadata, but we don't need it.
     # |> Enum.map(fn {k, _} -> k end)
     |> Enum.map(fn {key, details} -> List.first(details.metas) |> Map.put(:uuid, key) end)
+  end
+
+  # Thanks!
+  # https://stackoverflow.com/a/7641812/1010496
+
+  @minute 60
+  @hour @minute * 60
+  @day @hour * 24
+
+  def fuzzy_time(timestamp) do
+    now = System.system_time(:second)
+    delta = now - timestamp
+
+    cond do
+      delta < 0 -> "in the future"
+      delta < 30 -> "just then"
+      delta < @minute -> "seconds ago"
+      delta < 2 * @minute -> "a minute ago"
+      delta < @hour -> "#{floor(delta / @minute)} minutes ago"
+      delta < 2 * @hour -> "1 hour ago"
+      delta < @day -> "#{floor(delta / @hour)} hours ago"
+      delta < @day * 2 -> "yesterday"
+      true -> "#{floor(delta / @day)} days ago"
+    end
   end
 end
