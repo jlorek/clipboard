@@ -1,6 +1,6 @@
 <div>Open this link on any device to access or share your live clipboard (click to copy):
     <span class="cursor-pointer hover:underline"
-            x-data="{url: '<%= Routes.show_topic_url(@socket, :existing, @topic_id) %>'}"
+            x-data="{url: '<%= Routes.show_topic_url(@socket, :existing, @topic_hashid) %>'}"
             x-on:click="$clipboard(url); Utils.tryNativeShare(url)"
             x-text="url"></span>
 </div>

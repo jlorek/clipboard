@@ -1,14 +1,15 @@
 defmodule ClipboardWeb.Topic.ShareLinkLive do
   use ClipboardWeb, :live_component
 
-  def show_debug, do: false
-
+  @impl true
   def mount(socket) do
     {:ok, socket}
   end
 
-  def update(assigns, socket) do
-    socket = socket |> assign(:topic_id, assigns.topic_id)
+  @impl true
+  def update(_assigns = %{topic_id: topic_id}, socket) do
+    hashid = topic_id |> Clipboard.Ids.uuid_to_hashid()
+    socket = socket |> assign(:topic_hashid, hashid)
     {:ok, socket}
   end
 end
