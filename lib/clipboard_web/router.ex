@@ -25,6 +25,7 @@ defmodule ClipboardWeb.Router do
 
     live "/counter", CounterLive, :index
     live "/parent", ParentLive, :index
+    live "/qr/:topic_hashid", QrLive, :existing
 
   end
 

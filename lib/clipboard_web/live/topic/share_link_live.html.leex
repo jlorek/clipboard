@@ -4,3 +4,4 @@
             x-on:click="$clipboard(url); Utils.tryNativeShare(url)"
             x-text="url"></span>
 </div>
+<div><%= live_redirect "Show QR Code", to: Routes.qr_path(@socket, :existing, @topic_hashid) %></div>
