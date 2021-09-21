@@ -9,7 +9,6 @@ defmodule ClipboardWeb.Plugs.UserAgentPlug do
       |> Plug.Conn.get_req_header("user-agent")
       |> List.first()
       |> UAParser.parse()
-
     # |> IO.inspect(label: "User Agent")
 
     device =
