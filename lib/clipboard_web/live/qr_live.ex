@@ -4,7 +4,7 @@ defmodule ClipboardWeb.QrLive do
   def mount(_params = %{"topic_hashid" => topic_hashid}, _session, socket) do
     qr = Routes.show_topic_url(socket, :existing, topic_hashid)
     |> EQRCode.encode()
-    |> EQRCode.svg(viewbox: false)
+    |> EQRCode.svg(viewbox: true)
 
     socket = assign(socket, qr: qr, topic_hashid: topic_hashid)
     {:ok, socket }
@@ -23,9 +23,9 @@ defmodule ClipboardWeb.QrLive do
       <div>Scan this QR code with your phone to share your clipboard.</div>
       <button class="button" phx-click="go_back">Go back</button>
       <div class="flex flex-row justify-between">
-        <div></div>
-        <div><%= raw(@qr) %></div>
-        <div></div>
+        <div class="flex-1"></div>
+        <div class="flex-1"><%= raw(@qr) %></div>
+        <div class="flex-1"></div>
       </div>
     </div>
     """
