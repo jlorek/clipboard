@@ -57,7 +57,8 @@ import_config "prod.secret.exs"
 config :clipboard, ClipboardWeb.Endpoint,
   # http: [port: {:system, "PORT"}], # Possibly not needed, but doesn't hurt
   # url: [host: System.get_env("APP_NAME") <> ".gigalixirapp.com", port: 443],
-  url: [host: "clipboard.to", scheme: "https", port: 443],
+  # url: [host: "clipboard.to", scheme: "https", port: 443],
+  url: [host: "clipboard.jlorek.net", scheme: "https", port: 443],
   # https://gigalixir.readthedocs.io/en/latest/domain.html#how-to-set-up-ssl-tls
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
